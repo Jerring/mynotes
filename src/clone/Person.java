@@ -10,9 +10,9 @@ import java.io.*;
  * （引用类型要单独调用 clone 方法才能进行深拷贝，不然也是浅拷贝，对应的类也要实现 Cloneable 接口）
  */
 public class Person implements Cloneable, Serializable {  // 实现 Cloneable 接口（运用序列化实现深拷贝要实现 Serializable）
-    int age;
-    String name;
-    Baby baby;
+    private int age;
+    private String name;
+    private Baby baby;
 
     @Override
     public Person clone() { // 重写 clone 方法，将 protected 改为 public，Object 改为 Person
@@ -60,31 +60,4 @@ public class Person implements Cloneable, Serializable {  // 实现 Cloneable �
         System.out.println(person2.baby.getSex());
     }
 
-}
-
-class Baby implements Cloneable, Serializable {   // 实现 Cloneable 接口（运用序列化实现深拷贝要实现 Serializable）
-    String sex;
-
-    public Baby(String sex) {
-        this.sex = sex;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    @Override
-    public Baby clone() {   // 重写 clone 方法，将 protected 改为 public，Object 改为 Baby
-        Baby baby = null;
-        try {
-            baby = (Baby) super.clone();    // 调用 super.clone(); 因为 String 对象不可变，浅拷贝也没关系。
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return baby;
-    }
 }
