@@ -45,6 +45,7 @@ public class MyBlockingQueue<E> {
                 notEmpty.await();
             }
             E e = items[takeIndex];
+            items[takeIndex] = null;
             if (++takeIndex == items.length) {
                 takeIndex = 0;
             }
